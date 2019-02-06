@@ -1,0 +1,137 @@
+#myImg1{
+    height: 25%;
+    position: absolute;
+    right: 8px;
+    /*top: 0px;*/
+}
+
+#myImg2{
+  height: 18%;
+  position: absolute;
+  /* left: 0px;
+  /*top: 0px;*/
+}
+
+.collapsible{
+  background-color: rgb(66, 164, 221);
+  height: auto;
+  position: absolute;
+  /*border-bottom: 0px;*/
+  border-block-end: 0px;
+  right: 10px;
+}
+
+.back {
+  background-color: rgb(66, 164, 221);
+  height: auto;
+  position: absolute;
+  left: 10px;
+  top: 200px;
+  display: none;
+}
+
+.next {
+  background-color: rgb(66, 164, 221);
+  height: auto;
+  position: absolute;
+  right: 10px;
+  top: 200px;
+  display: none;
+}
+
+.back:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+
+.active, .collapsible:hover {
+  background-color: rgb(146, 204, 230);
+}
+
+
+
+.collapsible2{
+  background-color: rgb(66, 164, 221);
+  height: auto;
+  position: absolute;
+  /*border-bottom: 0px;*/
+  border-block-end: 0px;
+  right: 10px;
+}
+
+.active2, .collapsible2:hover {
+  background-color: rgb(146, 204, 230);
+}
+
+.addContent {
+  /*border-block-end: 0px;*/
+  display: none;
+  overflow: hidden;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-right: 20px;
+  height: auto !important;
+  font-weight: 500;
+  left: 20px;
+}
+
+.addContent2 {
+  display: none;
+  overflow: hidden;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  right: 0px !important;
+  height: auto !important;
+  font-weight: 500;
+  left: 20px;
+}
+
+.mySlides {
+  font-size: 30px;
+  display: none;
+  block-size: 50px;
+  padding-block-start: 20px;
+  padding-block-end: 20px;
+  vertical-align: middle;
+}
+
+body{
+  background-image: url("https://i.pinimg.com/originals/50/c5/1e/50c51e02a205b44c3449fc128400ff20.jpg");
+  background-size: 120px;
+}
+
+#linksDiv{
+  top:0px;
+  right:0px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+#headerDiv{
+  top:0px;
+  right:0px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  color: rgb(7, 7, 7);
+}
+
+
+br {
+  display: block; /* makes it have a width */
+  content: ""; /* clears default height */
+  margin-top: 10;
+}
+
+html *{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.lastImg{
+  width: 20%;
+  position: relative;
+  left: 40%;
+}
