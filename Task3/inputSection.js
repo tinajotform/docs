@@ -12,3 +12,4 @@ class InputSection extends React.Component {
   
   
   export default InputSection
+  
