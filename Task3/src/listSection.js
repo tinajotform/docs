@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class List extends React.Component {
-
+    
     render(){
         const {list} = this.props;
 
@@ -10,12 +10,9 @@ export default class List extends React.Component {
                 <ul 
                     className="UL"
                 >
-                    {list.map((currentItem, currentIndex) => <li>{currentItem}</li> )}
-                   
+                    {list.map((currentItem, currentIndex) => <li>{currentItem}</li> )} 
                 </ul>
             </div>
         )
     }
-
- 
 }

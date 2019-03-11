@@ -10,41 +10,17 @@ export default class App extends React.Component {
   }
 
   add = (event) => {
-    let isFounded = false;
-    for(let i=0;i<this.state.list.length;i++){
-      if(this.state.list[i] === this.state.text){
-        alert("This element has already been added!");
-        isFounded= true;
-        return;
-      }
-    }
     if(this.state.text === ''){
-      alert("Please write something!");
+      alert("Write something!");
       return;
     }
-    if(isFounded===false){
-      this.setState ({
-          list : [...this.state.list, this.state.text],
-          text: ''
-      });
-    }
-  }
-
-  addWithEnter = (event) => {
-    if(event.key === 'Enter'){
-      let isFounded2 = false;
-      for(let j=0;j<this.state.list.length;j++){
-        if(this.state.list[j] === this.state.text){
-          alert("This element has already been added!");
-          isFounded2= true;
-          return;
-        }
-      }
-      if(this.state.text === ''){
-        alert("Please write something!");
+    else{
+      let element = this.state.list.find(element => element === this.state.text);
+      if(element !== undefined){
+        alert("This element has already been added!");
         return;
       }
-      if(isFounded2===false){
+      else{
         this.setState ({
           list : [...this.state.list, this.state.text],
           text: ''
@@ -53,32 +29,53 @@ export default class App extends React.Component {
     }
   }
 
-  clear = (event) => {
-    let isFounded3 = false;
-    if(this.state.text === ''){
-      alert("Please write something!");
-      return;
-    }
-    else{
-      for(let k=0; k<this.state.list.length; k++){
-        if(this.state.list[k] === this.state.text) {
-          isFounded3 = true;
-          const firstArray = this.state.list.slice(0, k);
-          const secondArray = this.state.list.slice(k + 1, this.state.list.length);
-          this.setState ({
-            list :[...firstArray , ...secondArray],
-            text : ''
-          });
+  addWithEnter = (event) => {
+    if(event.key === 'Enter'){
+      if(this.state.text === ''){
+        alert("Write something!");
+        return;
+      }
+      else{
+        let element = this.state.list.find(element => element === this.state.text);
+        if(element !== undefined){
+          alert("This element has already been added!");
           return;
         }
-      }
-      if(isFounded3 === false){
-        alert("Element didn't be founded!");
+        else{
+          this.setState ({
+            list : [...this.state.list, this.state.text],
+            text: ''
+          });
+        }
       }
     }
-
   }
-    
+
+  clear = (event) => {
+    if(this.state.text === ''){
+      alert("Write something!");
+      return;
+    }
+    else{ 
+      let element = this.state.list.find(element => element === this.state.text);
+      if(element === undefined){
+        alert("Element didn't be founded!");
+      }
+      else{
+        this.setState ({
+            list : this.state.list.filter( item => item!==this.state.text ),
+            text : ''
+          });
+      }
+    }
+  }
+
+  clearAll = (event) => {
+      this.setState ({
+        list: [],
+        text: ''
+      });
+  }
 
   update = (event) => {
     this.setState ({ text : event.target.value })
@@ -106,6 +103,13 @@ export default class App extends React.Component {
           onClick={this.clear}
         >
           Clear
+        </button>
+        <button 
+          type="button"
+          className="button"
+          onClick={this.clearAll}
+        >
+          Clear All
         </button>
         <List 
           list={this.state.list}
