@@ -11,6 +11,7 @@ export default class List extends React.Component {
                     className="UL"
                 >
                     {list.map((currentItem, currentIndex) => <li>{currentItem}</li> )}
+                   
                 </ul>
             </div>
         )
