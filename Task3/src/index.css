@@ -65,7 +65,7 @@ ul:hover{
   background: #4372b1;
 
 }
-ul li.checked {
+ul li.deactive {
   background: #a2b9d6;
   color: rgb(7, 7, 7);
   text-decoration: line-through;

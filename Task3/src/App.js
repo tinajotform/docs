@@ -6,49 +6,42 @@ export default class App extends React.Component {
 
   state = {
     text: '',
-    list: ["Default"]
+    list: [
+      { text: 'blabla', isDone: false }
+    ]
+  }
+
+  changeDoneStatus = (event) => {
+
+    const element = this.state.list.find(element => element.text === this.state.text);
+
+    this.setState ({
+       list: [ {text : element.text, isDone : !this.state.list.isDone } ] }
+    )
   }
 
   add = (event) => {
-    if(this.state.text === ''){
+    const { text, list } = this.state;
+    if(text === ''){
       alert("Write something!");
       return;
     }
+    const element = list.find(element => element.text === text);
+    if(element){
+      alert("This element has already been added!");
+      return;
+    }
     else{
-      let element = this.state.list.find(element => element === this.state.text);
-      if(element !== undefined){
-        alert("This element has already been added!");
-        return;
-      }
-      else{
-        this.setState ({
-          list : [...this.state.list, this.state.text],
-          text: ''
-        });
-      }
+      this.setState ({
+        list : [...list, { text, isDone: false }],
+        text: ''
+      });
     }
   }
 
   addWithEnter = (event) => {
-    if(event.key === 'Enter'){
-      if(this.state.text === ''){
-        alert("Write something!");
-        return;
-      }
-      else{
-        let element = this.state.list.find(element => element === this.state.text);
-        if(element !== undefined){
-          alert("This element has already been added!");
-          return;
-        }
-        else{
-          this.setState ({
-            list : [...this.state.list, this.state.text],
-            text: ''
-          });
-        }
-      }
-    }
+    if(event.key === 'Enter')
+      return this.add(event);
   }
 
   clear = (event) => {
@@ -57,13 +50,13 @@ export default class App extends React.Component {
       return;
     }
     else{ 
-      let element = this.state.list.find(element => element === this.state.text);
+      let element = this.state.list.find(element => element.text === this.state.text);
       if(element === undefined){
         alert("Element didn't be founded!");
       }
       else{
         this.setState ({
-            list : this.state.list.filter( item => item!==this.state.text ),
+            list : this.state.list.filter( item => item.text!==this.state.text ),
             text : ''
           });
       }
@@ -80,6 +73,8 @@ export default class App extends React.Component {
   update = (event) => {
     this.setState ({ text : event.target.value })
   }
+
+
 
   render(){
     return (
@@ -113,6 +108,7 @@ export default class App extends React.Component {
         </button>
         <List 
           list={this.state.list}
+          onClick = {this.changeDoneStatus}
         />
       </header> 
      )
