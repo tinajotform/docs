@@ -4,7 +4,6 @@ export default class List extends React.Component {
 
     render(){
         const {list} = this.props;
-
          return (
             <div className="listDiv">
                 <ul 
@@ -13,7 +12,8 @@ export default class List extends React.Component {
                     {list.map(
                         (currentItem, currentIndex) => 
                         (<li style={{ textDecoration: currentItem.isDone ? 'line-through' : null }}
-                            onClick = {this.props.changeDoneStatus}   > 
+                            onClick = {() => this.props.onClick(currentItem)} 
+                        > 
                             {currentItem.text}
                         </li>)
                     )} 

@@ -7,23 +7,20 @@ export default class App extends React.Component {
   state = {
     text: '',
     list: [
-      { text: 'blabla', isDone: false }
+      { text: 'blabla', isDone: false}
     ]
   }
 
-  changeDoneStatus = (event) => {
-
-    const element = this.state.list.find(element => element.text === this.state.text);
-
+  changeDoneStatus = (current) => {
     this.setState ({
-       list: [ {text : element.text, isDone : !this.state.list.isDone } ] }
+      list: [ {text : current.text, isDone : !current.isDone } ] }
     )
   }
 
   add = (event) => {
     const { text, list } = this.state;
     if(text === ''){
-      alert("Write something!");
+    //  alert("Write something!");
       return;
     }
     const element = list.find(element => element.text === text);
@@ -46,7 +43,7 @@ export default class App extends React.Component {
 
   clear = (event) => {
     if(this.state.text === ''){
-      alert("Write something!");
+     // alert("Write something!");
       return;
     }
     else{ 
@@ -108,7 +105,7 @@ export default class App extends React.Component {
         </button>
         <List 
           list={this.state.list}
-          onClick = {this.changeDoneStatus}
+          onClick = {this.changeDoneStatus.bind(this)}
         />
       </header> 
      )
