@@ -7,20 +7,24 @@ export default class App extends React.Component {
   state = {
     text: '',
     list: [
-      { text: 'blabla', isDone: false}
+      { text: 'Default', isDone: false}
     ]
   }
 
-  changeDoneStatus = (current) => {
+  changeDoneStatus = (currentItem, currentIndex) => {
+    const { list } = this.state;
+    list[currentIndex].isDone = !currentItem.isDone; 
+
     this.setState ({
-      list: [ {text : current.text, isDone : !current.isDone } ] }
-    )
+      list
+    })
+
   }
 
   add = (event) => {
     const { text, list } = this.state;
     if(text === ''){
-    //  alert("Write something!");
+      alert("Write something!");
       return;
     }
     const element = list.find(element => element.text === text);
@@ -43,7 +47,7 @@ export default class App extends React.Component {
 
   clear = (event) => {
     if(this.state.text === ''){
-     // alert("Write something!");
+      alert("Write something!");
       return;
     }
     else{ 
@@ -73,10 +77,11 @@ export default class App extends React.Component {
 
 
 
+
   render(){
     return (
       <header className="header">
-        <h1>TODO LIST</h1>
+        <h1 style={{ color: "47b924" }}>TO-DO LIST</h1>
         <Input 
           text={this.state.text} 
           updateText={this.update}
@@ -103,6 +108,8 @@ export default class App extends React.Component {
         >
           Clear All
         </button>
+        <br></br>
+        <text>Number: {this.state.list.length}</text>
         <List 
           list={this.state.list}
           onClick = {this.changeDoneStatus.bind(this)}
