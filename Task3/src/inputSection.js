@@ -13,8 +13,7 @@ export default class Input extends React.Component {
                 value={this.props.text}
                 onChange={this.props.updateText}
                 onKeyPress={this.props.onKeyPress}
-            /><br/>
-            
+            /><br/>      
         </div>
         )
     }

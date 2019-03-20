@@ -12,7 +12,9 @@ export default class List extends React.Component {
                     {list.map(
                         (currentItem, currentIndex) => 
                         (<li style={{ textDecoration: currentItem.isDone ? 'line-through' : null }}
-                            onClick = {() => this.props.onClick(currentItem,currentIndex)} 
+                            draggable
+                            onClick = {() => this.props.onClick(currentItem,currentIndex)}
+                            onDragStart = {(e) => this.props.onDragStart(currentItem)} 
                         > 
                             {currentItem.text}
                         </li>)

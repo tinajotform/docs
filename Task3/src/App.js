@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './inputSection'
 import List from './listSection'
+import Trash from './Trash'
 
 export default class App extends React.Component {
 
@@ -8,15 +9,45 @@ export default class App extends React.Component {
     text: '',
     list: [
       { text: 'Default', isDone: false}
-    ]
+    ],
+    selected: {},
+    trash: []
   }
 
-  changeDoneStatus = (currentItem, currentIndex) => {
-    const { list } = this.state;
-    list[currentIndex].isDone = !currentItem.isDone; 
+  drag = (event) => {
+    event.preventDefault()
+  }
+
+  addToTrash = (event) => {
+    const { list, selected, trash } = this.state;
+    let selectedText = selected.text;
+    const newList = list.filter( item => item.text!==selectedText );
 
     this.setState ({
-      list
+      trash : [...trash, { selectedText , isDone: false }],
+      list : newList
+    });
+  }
+
+  selectElement = (currentItem) => {
+    const selectedElement = currentItem;
+      this.setState ({
+        selected: selectedElement
+      })
+   //  console.log(this.state.selected);
+  }
+
+  changeDoneStatus = (currentItem, targetIndex) => {
+    const { list } = this.state;
+    const newList = list.map((item,idx)=> {
+      if (targetIndex === idx){
+        return {...item, isDone : !item.isDone};
+      }
+      return item;
+    })
+
+    this.setState ({
+      list: newList
     })
 
   }
@@ -75,9 +106,6 @@ export default class App extends React.Component {
     this.setState ({ text : event.target.value })
   }
 
-
-
-
   render(){
     return (
       <header className="header">
@@ -87,6 +115,7 @@ export default class App extends React.Component {
           updateText={this.update}
           onKeyPress={this.addWithEnter}
         />
+        
         <button 
           type="button"
           className="button"
@@ -109,10 +138,16 @@ export default class App extends React.Component {
           Clear All
         </button>
         <br></br>
-        <text>Number: {this.state.list.length}</text>
-        <List 
+        <p>Number: {this.state.list.length}</p>
+        <Trash
+          onDragOver={this.drag}
+          onDrop={this.addToTrash}
+          trash={this.state.trash}
+        />
+        <List     
           list={this.state.list}
           onClick = {this.changeDoneStatus.bind(this)}
+          onDragStart = {this.selectElement}
         />
       </header> 
      )
