@@ -7,8 +7,7 @@ export default class Trash extends React.Component {
     render(){
         return (
             <div id="trash" className="droppable"
-            onDragOver={(e)=>this.props.onDragOver(e)}                    
-            onDrop={(e)=>this.props.onDrop(e)}  
+            onMouseUp={(e)=>this.props.onMouseUp(e)} 
             >
              <img id="icon" src= {icon}/>
              

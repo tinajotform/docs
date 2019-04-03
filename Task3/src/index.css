@@ -9,6 +9,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+#root {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -41,12 +47,18 @@ ul li{
   color: rgb(0, 0, 0);
 }
 
+#moving {
+  position: absolute;
+}
+
 ul {
   background: #dbe6d7;
 }
 ul li:hover {
   background: #91a18b;
 }
+
+
 
 #trash #icon{
   top: 10px;

@@ -12,9 +12,8 @@ export default class List extends React.Component {
                     {list.map(
                         (currentItem, currentIndex) => 
                         (<li style={{ textDecoration: currentItem.isDone ? 'line-through' : null }}
-                            draggable
                             onClick = {() => this.props.onClick(currentItem,currentIndex)}
-                            onDragStart = {(e) => this.props.onDragStart(currentItem)} 
+                            onMouseDown = {(e) => this.props.onMouseDown(currentItem)}
                         > 
                             {currentItem.text}
                         </li>)

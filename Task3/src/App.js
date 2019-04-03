@@ -1,41 +1,76 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Input from './inputSection'
 import List from './listSection'
 import Trash from './Trash'
+import heart from './heart.png'
 
 export default class App extends React.Component {
 
   state = {
     text: '',
     list: [
-      { text: 'Default', isDone: false}
+      { text: 'Default', isDone: false }
     ],
-    selected: {},
-    trash: []
-  }
-
-  drag = (event) => {
-    event.preventDefault()
+    selected : null,
+    trash: [],
+    posX: 0,
+    posY: 0,
+    //imgvisibility: null,
   }
 
   addToTrash = (event) => {
     const { list, selected, trash } = this.state;
+    if(selected === null) {
+      console.log("nothing selected");
+      return;
+    }
     let selectedText = selected.text;
     const newList = list.filter( item => item.text!==selectedText );
 
     this.setState ({
       trash : [...trash, { selectedText , isDone: false }],
-      list : newList
+      list : newList,
+      //imgvisibility: null,
     });
   }
 
   selectElement = (currentItem) => {
     const selectedElement = currentItem;
-      this.setState ({
-        selected: selectedElement
-      })
-   //  console.log(this.state.selected);
+    this.setState ({
+      selected: selectedElement,
+     // imgvisibility: "visible"
+    })
+    console.log(this.state.selected + "selected");
   }
+
+  unSelect = (event) => {
+    this.setState ({
+     // imgvisibility : "hidden",
+      selected: null
+    })
+  }
+
+  Move = (event) => {
+    if(this.selected === null){
+      this.setState ({
+      //  imgvisibility: "hidden"
+      })
+    }
+    else{
+    // var offset = this.offset();
+      var sX = event.pageX;
+      var sY = event.pageY;
+      
+      this.setState ({
+        posX: sX,
+        posY: sY,
+      //  imgvisibility : "visible",
+      })
+        //console.log(event.screenX, event.screenY);
+        console.log("moved");
+    }
+  }
+
 
   changeDoneStatus = (currentItem, targetIndex) => {
     const { list } = this.state;
@@ -108,7 +143,17 @@ export default class App extends React.Component {
 
   render(){
     return (
-      <header className="header">
+      <div
+      style = {{ position: 'absolute', width: '100%', height: '100%' }}
+      onMouseOver={this.Move}
+      onMouseUp={this.unSelect}
+      >
+      <div id="moving" style={{top:this.state.posY, left:this.state.posX, visibility: this.state.selected!=null ? "visible" : "hidden"}}>
+         <img src={heart} style={{height: 40}}/>
+      </div>
+      <header className="header"
+       
+      >
         <h1 style={{ color: "47b924" }}>TO-DO LIST</h1>
         <Input 
           text={this.state.text} 
@@ -140,16 +185,17 @@ export default class App extends React.Component {
         <br></br>
         <p>Number: {this.state.list.length}</p>
         <Trash
-          onDragOver={this.drag}
-          onDrop={this.addToTrash}
+          onMouseUp = {this.addToTrash}
           trash={this.state.trash}
         />
         <List     
           list={this.state.list}
           onClick = {this.changeDoneStatus.bind(this)}
-          onDragStart = {this.selectElement}
-        />
+          onMouseDown = {this.selectElement}
+        />      
       </header> 
+      </div>
+
      )
   }
 }
