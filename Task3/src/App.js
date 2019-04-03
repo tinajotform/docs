@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Input from './inputSection'
 import List from './listSection'
 import Trash from './Trash'
-import heart from './heart.png'
+import heart from './hearts.gif'
 
 export default class App extends React.Component {
 
